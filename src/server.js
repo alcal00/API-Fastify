@@ -1,14 +1,17 @@
 import fastify from "fastify";
-import { findTodos } from "./functions/todos_storage.js";
+import { createTodo, findTodos } from "./functions/todos_storage.js";
 
 
 const fast = fastify({
-    logger: true
+    logger: false
 })
 
-
 fast.get('/todos', async (request, reply) => {
-     return findTodos()
+    return findTodos()
+})
+
+fast.post('/todos', async (request, reply) => {
+    return createTodo(request.body)
 })
 
 
