@@ -1,5 +1,5 @@
 import fastify from "fastify";
-import { createTodo, findTodos } from "./functions/todos_storage.js";
+import { createTodo, findTodos, removeTodo } from "./functions/todos_storage.js";
 
 
 const fast = fastify({
@@ -14,6 +14,11 @@ fast.post('/todos', async (request, reply) => {
     return createTodo(request.body)
 })
 
+fast.delete('/todos', async (request, reply) =>{
+    const url = new URL(request.url, `http://${request.hostname}`)
+    return removeTodo(parseInt(url.searchParams.get('id'),10))
+    reply.statusCode = 204
+})
 
 const start = async () => {
     try {

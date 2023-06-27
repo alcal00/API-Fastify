@@ -13,3 +13,14 @@ export async function createTodo({ title, completed = false }) {
     await writeFile(path, JSON.stringify(todos,null, 2))
     return todo
 }
+
+export async function removeTodo(id) {
+    const todos = await findTodos()
+    // On regarde si l'id existe s'il existe pas findIndex renvoie -1
+    const todo = todos.findIndex(todo => todo.id === id)
+    if (todo === -1) {
+        throw new Error()
+    }
+    //On garde les todos qui ont un id différent
+    await writeFile(path, JSON.stringify(todos.filter(todo => todo.id !== id),null, 2))
+}
