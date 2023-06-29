@@ -38,5 +38,20 @@ describe('Test Todos', () => {
         expect(checkResponse.statusCode).toBe(200)
         expect(checkResponse.body.some(todo => todo.id === deleteTodo)).toBe(false)
     })
+    it('Test PUT/todos voir si on met bien à jour la tâche', async () => {
+        const updateTodoId = 1688049729007
+        const todoUpdated = {
+            "title": 'MaJ Todo',
+            "completed": true
+        }
+        const response = await request(baseUrl)
+            .put(`/todos?id=${updateTodoId}`)
+            .send(todoUpdated)
+        expect(response.statusCode).toBe(200)
+        expect(response.body.id).toEqual(updateTodoId)
+        expect(response.body.title).toBe(todoUpdated.title)
+        expect(response.body.completed).toBe(todoUpdated.completed)
+    
+    })
 
 })
