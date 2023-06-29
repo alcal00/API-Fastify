@@ -8,7 +8,7 @@ export async function findTodos(){
 }
 
 export async function createTodo({ title, completed = false }) {
-    const todo = { title, completed, id: Date.now() }
+    const todo = { id: Date.now(), title, completed}
     const todos = [todo, ...await findTodos()]
     await writeFile(path, JSON.stringify(todos,null, 2))
     return todo
@@ -35,3 +35,4 @@ export async function updateTodo(id, partialTodo) {
     await writeFile(path, JSON.stringify(todos,null, 2))
     return todo
 }
+
