@@ -1,13 +1,8 @@
 [
   {
-    "id": 1688112765517,
-    "title": "MaJ Todo",
-    "completed": true
-  },
-  {
     "id": 1688112765503,
     "title": "Test Todo1",
-    "completed": false
+    "completed": true
   },
   {
     "id": 1688049729007,
