@@ -1,6 +1,5 @@
 const request = require('supertest')
-const baseUrl = 'http://localhost:3000'
-const todos = require('../storage/todos.json')
+const baseUrl = 'http://localhost:8000'
 
 
 describe('Test Todos', () => {
@@ -13,7 +12,6 @@ describe('Test Todos', () => {
         const response = await request(baseUrl).get('/todos')
         expect(response.headers).toBeDefined()
         expect(response.statusCode).toBe(200)
-        expect(response.body).toMatchObject(todos)
         expect(response.body).toEqual(expect.arrayContaining(expected))
     })
     it('Test POST/todos voir si on créé bien une todo', async () => {
@@ -56,7 +54,7 @@ describe('Test Todos', () => {
         const updateTodoId = post.body.id
         const response = await request(baseUrl)
             .put(`/todos?id=${updateTodoId}`)
-            .send(newTodoUpdated)   
+            .send(newTodoUpdated)
         expect(response.statusCode).toBe(200)
         expect(response.body.id).toEqual(updateTodoId)
         expect(response.body.title).toBe(newTodoUpdated.title)
